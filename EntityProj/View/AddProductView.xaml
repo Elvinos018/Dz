@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="EntityProj.View.AddProductView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+             xmlns:local="clr-namespace:EntityProj.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Name="Main">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Margin="5" Grid.Row="0" FontSize="20">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction
+                                Command="{Binding ProductSearch}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding List}" Margin="10" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding ProductName}" FontSize="20"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding UnitPrice}" FontSize="20">
+                            <TextBlock.Style >
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsDiscontinued}" Value="True">
+                                            <Setter Property="Foreground" Value="Green"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Package}" FontSize="15"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Supplier.CompanyName}" FontSize="15"/>
+
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Command="{Binding  DataContext.DeleteFromData, ElementName=Main}" CommandParameter="{Binding .}" Margin="5" Grid.Column="0" FontSize="20">✖</Button>
+                            <Button Command="{Binding DataContext.EditElement, ElementName=Main}" Margin="5" Grid.Column="1" FontSize="20">✏</Button>
+                            
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Command="{Binding NextWindow}" Margin="5" Grid.Row="2" FontSize="20">AddProduct</Button>
+    </Grid>
+</UserControl>

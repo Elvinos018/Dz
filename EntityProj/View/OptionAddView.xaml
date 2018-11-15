@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="EntityProj.View.OptionAddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EntityProj.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" FontSize="20">Name</Label>
+        <TextBox Text="{Binding Product.ProductName}" Grid.Row="1" FontSize="20"/>
+        <Label Grid.Row="2" FontSize="20">Price</Label>
+        <TextBox Text="{Binding Product.UnitPrice}" Grid.Row="3" FontSize="20"/>
+        <Label Grid.Row="4" FontSize="20">Package</Label>
+        <TextBox Text="{Binding Product.Package}" Grid.Row="5" FontSize="20"/>
+        <Label Grid.Row="6" FontSize="20">Supplier</Label>
+        <ComboBox SelectedItem="{Binding SelectedSupplier}" DisplayMemberPath="CompanyName" ItemsSource="{Binding List}" Grid.Row="7" FontSize="20"/>
+        <CheckBox IsChecked="{Binding Product.IsDiscontinued}" Grid.Row="8" FontSize="20">Discount</CheckBox>
+        <Grid Grid.Row="9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding PreviousWindow}" Grid.Column="0" FontSize="20">Cancel</Button>
+            <Button Command="{Binding AddToData}" Grid.Column="1" FontSize="20" Content="{Binding ButtonName}"></Button>
+        </Grid>
+    </Grid>
+</UserControl>
