@@ -9,6 +9,6 @@ namespace EntityProj.Message
 {
     class ProductMessage
     {
-        public Product Product { get; set; }
+        public Product Product { get; set; } //Обновлен
     }
 }
